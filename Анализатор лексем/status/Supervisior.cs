@@ -7,9 +7,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Анализатор_лексем
+namespace Analyzer
 {
-    public static class S 
+    public static class Supervisior 
     {
         public static void END(string data)
         {
@@ -23,28 +23,23 @@ namespace Анализатор_лексем
             {
                 switch (InputData.CurentCharGroup())
                 {
-                    case "<ц>":
-                        NUM.Analyse();
+                    case "<цифра>":
+                        Num.Analyse();
                         break;
 
-                    case "<б>":
-                        ID.Analyse();
+                    case "<буква>":
+                        Id.Analyse();
                         break;
 
                     case "< >":
                         InputData.Pointer++;
                         break;
-
-                    case "<\">":
-                        STR.Analyse();
-                        break;
-
                     case "<,>":
-                        END("разделительный символ");
+                        END("Распознана <,>");
                         break;
 
                     case "<;>":
-                        END("концевой символ");
+                        END("Распознана <;>");
                         break;
 
                     case "<с>":
@@ -52,52 +47,45 @@ namespace Анализатор_лексем
                         break;
 
                     case "<<>":
-                        LESS.Analyse();
+                        Less.Analyse();
                         break;
 
                     case "<>>":
-                        MORE.Analyse();
-                        break;
-
-                    case "<=>":
-                        END("оператор присваивания");
-                        break;
-
-                    case "<&>":
-                        AND.Analyse();
-                        break;
-
-                    case "<|>":
-                        OR.Analyse();
+                        More.Analyse();
                         break;
                     case "<!>":
-                        NOT.Analyse();
+                        NotEqual.Analyse();
                         break;
-
+                    case "<#>":
+                        Equal.Analyse();
+                        break;
+                    case "<=>":
+                        END("оператор присваивания");
+                        break;                   
                     case "<(>":
-                        END("символ группировки");
+                        END("Распознана <(>");
                         break;
 
                     case "<)>":
-                        END("символ группировки");
+                        END("Распознана <)>");
                         break;
 
                     case "<[>":
-                        END("символ группировки");
+                        END("Распознана <[>");
                         break;
 
                     case "<]>":
-                        END("символ группировки");
+                        END("Распознана <]>");
                         break;
                     case "<{>":
-                        END("символ группировки");
+                        END("Распознана <{>");
                         break;
 
                     case "<}>":
-                        END("символ группировки");
+                        END("Распознана <}>");
                         break;
 
-                    case "<o>":
+                    case "<O>":
                         throw new Exception("Недопустимый символ.");
 
                     default:

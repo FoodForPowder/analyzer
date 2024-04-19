@@ -1,16 +1,17 @@
-﻿namespace Анализатор_лексем
+﻿namespace Analyzer
 {
-    public interface ILexicalAnalyzer
-    {
-        
-    }
-
     public static class Program
     {
 
         static void Main()
         {
-            S.Analyse();
+            try
+            {
+                Supervisior.Analyse();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
     }
 }

@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Анализатор_лексем
+namespace Analyzer
 {
-    public static class EQUAL
+    public static class Equal
     {
         private static void END()
         {
-            if (InputData.Current == ' ') Console.WriteLine("Распознан оператор присваивания: = ");
-            else if (InputData.Current == '=') Console.WriteLine("Распознан оператор сравнения: == ");
-            else throw new Exception("Недопустимый символ");
+             Console.WriteLine("Распознан оператор равенства: # ");                   
             InputData.Pointer++;
         }
         private static void END_minus()
         {
-            Console.WriteLine("Распознан оператор присваивания: =");
+            Console.WriteLine("Распознан оператор присваивания: #");
         }
 
         public static void Analyse()
@@ -25,18 +23,15 @@ namespace Анализатор_лексем
             InputData.Pointer++;
             switch (InputData.CurentCharGroup())
             {
-                case "<ц>": END_minus(); break;
-                case "<б>": END_minus(); break;
+                case "<цифра>": END_minus(); break;
+                case "<буква>": END_minus(); break;
                 case "< >": END(); break;
-                case "<\">": END_minus(); break;
                 case "<,>": throw new Exception("Недопустимый символ");
                 case "<;>": throw new Exception("Недопустимый символ");
                 case "<с>": END_minus(); break;
                 case "<<>": throw new Exception("Недопустимый символ");
                 case "<>>": throw new Exception("Недопустимый символ");
-                case "<=>": END(); break;
-                case "<&>": throw new Exception("Недопустимый символ");
-                case "<|>": throw new Exception("Недопустимый символ");
+                case "<=>": throw new Exception("Недопустимый символ");
                 case "<!>": throw new Exception("Недопустимый символ");
                 case "<(>": END_minus(); break;
                 case "<)>": throw new Exception("Недопустимый символ");
@@ -44,7 +39,7 @@ namespace Анализатор_лексем
                 case "<]>": throw new Exception("Недопустимый символ");
                 case "<{>": throw new Exception("Недопустимый символ");
                 case "<}>": throw new Exception("Недопустимый символ");
-                case "<o>": throw new Exception("Недопустимый символ");
+                case "<O>": throw new Exception("Недопустимый символ");
                 default: throw new Exception("Недопустимый символ");
             }
         }

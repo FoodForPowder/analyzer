@@ -5,11 +5,11 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Анализатор_лексем
+namespace Analyzer
 {
     public static class InputData
     {
-        public static string Data { get; set; } = " private double; private;";
+        public static string Data { get; set; } = "if (a ! 5 ) 6, 3 {a = 122;};";
         public static int Pointer { get; set; } = 0;
 
         public static char Current { get { return Data[Pointer]; } }
@@ -18,11 +18,10 @@ namespace Анализатор_лексем
         public static string CurentCharGroup()
         {
             if (Current >= '0' && Current <= '9')
-                return "<ц>";
+                return "<цифра>";
             else if (Current >= 'a' && Current <= 'z' || Current >= 'A' && Current <= 'Z' || Current == '_')
-                return "<б>";
-            else if (Current == ' ') return "< >";
-            else if (Current == '\"') return "<\">";
+                return "<буква>";
+            else if (Current == ' ') return "< >";           
             else if (Current == ',') return "<,>";
             else if (Current == ';') return "<;>";
             else if (Current == '+' || Current == '-' || Current == '*' || Current == '/' || Current == '%')
@@ -30,8 +29,7 @@ namespace Анализатор_лексем
             else if (Current == '<') return "<<>";
             else if (Current == '>') return "<>>";
             else if (Current == '=') return "<=>";
-            else if (Current == '&') return "<&>";
-            else if (Current == '|') return "<|>";
+            else if (Current == '#') return "<#>";
             else if (Current == '!') return "<!>";
             else if (Current == '(') return "<(>";
             else if (Current == ')') return "<)>";
@@ -40,8 +38,8 @@ namespace Анализатор_лексем
             else if (Current == '{') return "<{>";
             else if (Current == '}') return "<}>";
             else if (Current >= 'а' && Current <= 'я' || Current >= 'А' && Current <= 'Я' || Current == '?' || Current == '.')
-                return "<o>";
-            else throw new ArgumentOutOfRangeException("символ \"" + Current + "\" недопустим в грамматике");
+                return "<O>";
+            else throw new ArgumentOutOfRangeException($"Cимвол <{Current}> недопустим в грамматике");
         }
     }
 }

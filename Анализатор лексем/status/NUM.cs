@@ -5,9 +5,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Анализатор_лексем
+namespace Analyzer
 {
-    public static class NUM
+    public static class Num
     {
         private static int number = 0;
         private static void END()
@@ -23,31 +23,27 @@ namespace Анализатор_лексем
         }
         public static void Analyse()
         {
-            number = number * 10 + (InputData.Current - '0');
+            number = number * 10 + ((int)char.GetNumericValue(InputData.Current));
             InputData.Pointer++;
             switch (InputData.CurentCharGroup())
             {
-                case "<ц>":  Analyse(); break;
-                case "<б>":  throw new Exception("Недопустимый символ");
-                case "< >":  END(); break;
-                case "<\">": throw new Exception("Недопустимый символ");
-                case "<,>":  END_minus(); break;
-                case "<;>":  END_minus(); break;
-                case "<с>":  END_minus(); break;
-                case "<<>":  END_minus(); break;
-                case "<>>":  END_minus(); break;
-                case "<=>":  END_minus(); break;
-                case "<&>":  END_minus(); break;
-                case "<|>":  END_minus(); break;
-                case "<!>":  throw new Exception("Недопустимый символ");
-                case "<(>":  throw new Exception("Недопустимый символ");
-                case "<)>":  END_minus(); break;
-                case "<[>":  throw new Exception("Недопустимый символ");
-                case "<]>":  END_minus(); break;
-                case "<{>":  throw new Exception("Недопустимый символ");
-                case "<}>":  throw new Exception("Недопустимый символ");
-                case "<o>":  throw new Exception("Недопустимый символ");
-                default:     throw new Exception("Недопустимый символ");
+                case "<цифра>": Analyse(); break;
+                case "<буква>": throw new Exception("Недопустимый символ");
+                case "< >": END(); break;
+                case "<,>": END_minus(); break;
+                case "<;>": END_minus(); break;
+                case "<с>": END_minus(); break;
+                case "<<>": END_minus(); break;
+                case "<>>": END_minus(); break;
+                case "<=>": END_minus(); break;
+                case "<!>": END_minus(); break;
+                case "<(>": throw new Exception("Недопустимый символ");
+                case "<)>": END_minus(); break;
+                case "<[>": throw new Exception("Недопустимый символ");
+                case "<]>": END_minus(); break;
+                case "<{>": throw new Exception("Недопустимый символ");
+                case "<}>": throw new Exception("Недопустимый символ");
+                default: throw new Exception("Недопустимый символ");
             }
         }
     }
